@@ -17,6 +17,6 @@ const router = express.Router();
 
 router.get("/", authController.home);
 
-router.get("/register", authController.register);
+router.post("/register", authController.register);
 
 module.exports = router;

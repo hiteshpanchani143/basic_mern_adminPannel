@@ -1,12 +1,15 @@
-const express  = require("express");
-
+const express = require("express");
 const app = express();
 
-app.get("/register",(req,res)=>{
-res.send("welcome to register page")
-})
+const AuthRouter = require("./routes/authRoute");
 
-const PORT = 8080
-app.listen(PORT,()=>{
-    console.log(`server is running at port : ${PORT}`)
-})
+app.get("/", (req, res) => {
+  res.status(200).send("welcome to Home page");
+});
+
+app.use("/app/v1/auth/", AuthRouter);
+
+const PORT = 8080;
+app.listen(PORT, () => {
+  console.log(`server is running at port : ${PORT}`);
+});

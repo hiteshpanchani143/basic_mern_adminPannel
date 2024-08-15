@@ -1,4 +1,5 @@
 const express = require("express");
+const authController = require("../controllers/authController");
 
 const router = express.Router();
 
@@ -12,10 +13,10 @@ const router = express.Router();
 //     res.status(200).send("home post route");
 //   });
 
-
 // second method for indiviual route
-router.get("/register", (req, res) => {
-  res.send("hello router");
-});
+
+router.get("/", authController.home);
+
+router.get("/register", authController.register);
 
 module.exports = router;

@@ -28,7 +28,12 @@ const register = async (req, res) => {
       password,
       phone,
     });
-    res.status(201).send({ msg: "welcome to register page", user });
+    res.status(201).send({
+      msg: "user create successfully",
+      user,
+      token: user.generateToken(),
+      userId: user._id.toString(), // mongodb is store id as a object so we convert id as a string for easily manage other logic.
+    });
   } catch (error) {
     res.status(400).send({ msg: "error in register", error: error.message });
   }

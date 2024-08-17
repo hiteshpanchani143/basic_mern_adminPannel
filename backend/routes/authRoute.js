@@ -1,7 +1,10 @@
 const express = require("express");
 const authController = require("../controllers/authController");
 const validate = require("../middelware/validator/validator");
-const signupSchema = require("../middelware/validator/authValidator");
+const {
+  signupSchema,
+  loginSchema,
+} = require("../middelware/validator/authValidator");
 
 const router = express.Router();
 
@@ -20,6 +23,6 @@ const router = express.Router();
 router.get("/", authController.home);
 
 router.post("/register", validate(signupSchema), authController.register);
-router.post("/login", authController.login);
+router.post("/login", validate(loginSchema), authController.login);
 
 module.exports = router;

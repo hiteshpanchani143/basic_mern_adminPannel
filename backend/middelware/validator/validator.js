@@ -7,8 +7,17 @@ const validate = (schema) => async (req, res, next) => {
     const parseBody = await schema.parseAsync(req.body);
     req.body = parseBody;
     next();
-  } catch (error) {
-    res.status(400).json({ msg: error.issues[0].message });
+  } catch (err) {
+    // res.status(400).json({ msg: err.errors[0].message });
+    const status = 400;
+    const message = err.errors[0].message || "Validation error";
+    const extraDetailes = "Error from backend";
+    const error = {
+      status,
+      message,
+      extraDetailes,
+    };
+    next(error);
   }
 };
 

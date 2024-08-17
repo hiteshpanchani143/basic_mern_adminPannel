@@ -34,7 +34,8 @@ const register = async (req, res) => {
       userId: user._id.toString(), // mongodb is store id as a object so we convert id as a string for easily manage other logic.
     });
   } catch (error) {
-    res.status(500).json({ msg: "error in register", error: error.message });
+    // res.status(500).json({ msg: "error in register", error: error.message });
+    next(error);
   }
 };
 
@@ -57,7 +58,8 @@ const login = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({ msg: "internal server error" });
+    // return res.status(500).json({ msg: "internal server error" });
+    next(error);
   }
 };
 

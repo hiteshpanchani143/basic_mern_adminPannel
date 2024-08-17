@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const home = async (req, res) => {
   try {
-    res.status(200).josn({ msg: "welcome to home page" });
+    res.status(200).json({ msg: "welcome to home page" });
   } catch (error) {
     console.log({ msg: "error in home page", error: error.message });
   }

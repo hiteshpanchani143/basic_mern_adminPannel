@@ -175,3 +175,13 @@ a.active{
 }
 
 /***** End analytics Section *****/
+
+/* footer section */
+.footer_section{
+  background-color: var(--btn-color);
+  height: 10rem;
+  display: grid;
+  place-items: center;
+  margin-top: 10rem;
+}
+/*end footer section */

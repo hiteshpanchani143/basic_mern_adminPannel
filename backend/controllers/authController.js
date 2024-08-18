@@ -71,7 +71,7 @@ const user = async (req, res) => {
     const userData = req.user;
     return res
       .status(200)
-      .json({ data: userData, message: "user get successfully" });
+      .json(userData);
   } catch (error) {
     console.log(`error is user controller : ${error}`);
   }

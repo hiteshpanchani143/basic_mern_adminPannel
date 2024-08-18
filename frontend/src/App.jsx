@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Service from "./pages/Service";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import PageNotFound from "./pages/PageNotFound";
 function App() {
   return (
     <BrowserRouter>
@@ -19,8 +20,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/service" element={<Service />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }

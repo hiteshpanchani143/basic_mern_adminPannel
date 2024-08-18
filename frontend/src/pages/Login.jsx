@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
+  const { storeTokenInLocalStorage } = useAuth();
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -20,7 +22,9 @@ const Login = () => {
         user
       );
       const data = await response;
+      console.log(data);
       if (data) {
+        storeTokenInLocalStorage(data?.data.token);
         setUser({
           email: "",
           password: "",
@@ -29,7 +33,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      alert(error.response.data.msg);
+      alert(error.response.data.message);
     }
   };
   return (

@@ -8,6 +8,7 @@ const home = async (req, res) => {
   }
 };
 
+// Register User
 const register = async (req, res) => {
   try {
     const { username, email, password, phone } = req.body;
@@ -39,6 +40,7 @@ const register = async (req, res) => {
   }
 };
 
+// Login User
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -63,4 +65,16 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { home, register, login };
+// Get User
+const user = async (req, res) => {
+  try {
+    const userData = req.user;
+    return res
+      .status(200)
+      .json({ data: userData, message: "user get successfully" });
+  } catch (error) {
+    console.log(`error is user controller : ${error}`);
+  }
+};
+
+module.exports = { home, register, login, user };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../store/auth";
-
+import axios from "axios";
 const Contact = () => {
   const [contact, setContact] = useState({
     username: "",
@@ -9,9 +9,8 @@ const Contact = () => {
   });
   const [userData, setUserData] = useState(true);
   const { user } = useAuth();
-  console.log(user);
   if (userData && user) {
-    setContact({ 
+    setContact({
       username: user.username,
       email: user.email,
       message: "",
@@ -30,10 +29,23 @@ const Contact = () => {
   };
 
   // handle fomr getFormSubmissionInfo
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(contact);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/form/contact",
+        contact
+      );
+      if (response.statusText) {
+        const data = await response.data;
+        console.log(data);
+        setContact({ message: "" });
+        alert(data.message);
+      }
+    } catch (error) {
+      alert(error.response.data.message);
+      console.log(error);
+    }
   };
 
   //  Help me reach 1 Million subs 👉 https://youtube.com/thapatechnical

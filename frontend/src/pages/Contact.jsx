@@ -11,7 +11,7 @@ const Contact = () => {
   const { user } = useAuth();
   console.log(user);
   if (userData && user) {
-    setContact({
+    setContact({ 
       username: user.username,
       email: user.email,
       message: "",

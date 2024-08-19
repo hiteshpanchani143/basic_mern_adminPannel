@@ -1,8 +1,15 @@
+import { useAuth } from "../store/auth";
+
 const About = () => {
+  const { user } = useAuth();
   return (
     <section className="section-hero">
       <div className="container grid grid-two-cols">
         <div className="hero-content">
+          <h2>
+            Welcome,{" "}
+            {user ? `${user?.username} to our website` : "to our website"}
+          </h2>
           <p>Welcome,Basic Learn Mern stack</p>
           <h1>Why Choose Us</h1>
           <p>

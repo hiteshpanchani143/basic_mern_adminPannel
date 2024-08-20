@@ -38,7 +38,7 @@ const Register = () => {
           password: "",
           phone: "",
         });
-        navigate("/login");
+        navigate("/ ");
         toast.success("Registration Successfully");
       } else {
         toast.error(data.extraDetailes ? data.extraDetailes : data.message);

@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [services, setServices] = useState([]);
   const storeTokenInLocalStorage = (token) => {
+    setToken(token)
     return localStorage.setItem("token", token);
   };
   const logoutUser = () => {

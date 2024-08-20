@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
+import axios from "axios";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -18,10 +19,29 @@ const AdminUsers = () => {
       console.log(error);
     }
   };
+  const deleteUser = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/api/v1/admin/user/delete/${id}`,
+        {
+          headers: {
+            Authorization: authorizationToken,
+          },
+        }
+      );
+      console.log("response", response);
+      const data = await response;
+      console.log("user after delete", data);
+      if (data) {
+        getAllUsersData();
+      }
+    } catch (error) {
+      console.log("catch block", error);
+    }
+  };
   useEffect(() => {
     getAllUsersData();
   }, []);
-  console.log(users);
   return (
     <section className="admin-users-section">
       <div className="container">
@@ -47,8 +67,17 @@ const AdminUsers = () => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
-                  <td>Edit</td>
-                  <td>Delete</td>
+                  <td>
+                    <button className="btn">Edit</button>
+                  </td>
+                  <td>
+                    <button
+                      className="btn"
+                      onClick={() => deleteUser(user._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}

@@ -10,6 +10,12 @@ router.get(
   adminMiddleware,
   adminController.getAllUser
 );
+router.delete(
+  "/user/delete/:id",
+  authMiddleware,
+  adminMiddleware,
+  adminController.deleteUser
+);
 router.get(
   "/service",
   authMiddleware,

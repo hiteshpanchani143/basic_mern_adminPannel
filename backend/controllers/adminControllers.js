@@ -16,6 +16,15 @@ const getAllUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await User.findOneAndDelete({ _id: id });
+    return res.status(200).json({ message: "User Delete Successfully." });
+  } catch (error) {
+    next(error);
+  }
+};
 // for services
 const getAllServices = async (req, res) => {
   try {
@@ -47,4 +56,4 @@ const getAllContact = async (req, res) => {
     next(error);
   }
 };
-module.exports = { getAllUser, getAllServices, getAllContact };
+module.exports = { getAllUser, deleteUser, getAllServices, getAllContact };

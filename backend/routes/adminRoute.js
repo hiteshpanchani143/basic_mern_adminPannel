@@ -1,13 +1,10 @@
 const express = require("express");
-const {
-  getAllUser,
-  getAllServices,
-  getAllContact,
-} = require("../controllers/adminControllers");
+const adminController = require("../controllers/adminControllers");
 const router = express.Router();
+const authMiddleware = require("../middelware/auth/authMiddleware");
 
-router.get("/user", getAllUser);
-router.get("/service", getAllServices);
-router.get("/contact", getAllContact);
+router.get("/user", authMiddleware, adminController.getAllUser);
+router.get("/service", authMiddleware, adminController.getAllServices);
+router.get("/contact", authMiddleware, adminController.getAllContact);
 
 module.exports = router;

@@ -1,10 +1,34 @@
+import { useAuth } from "../store/auth";
+
 const Service = () => {
-    return (
-      <div>
-        <h1>Service Page</h1>
+  const { services } = useAuth();
+  return (
+    <section className="section-services">
+      <div className="container">
+        <h1 className="main-heading">Services</h1>
       </div>
-    );
-  };
-  
-  export default Service;
-  
+      <div className="container grid grid-three-cols">
+        {services?.map((serviceData, index) => {
+          const { service, description, price, provider } = serviceData;
+          return (
+            <div className="card">
+              <div className="card-img">
+                <img src="/images/home.png" alt="designer" width="200" />
+              </div>
+              <div className="card-details">
+                <div className="grid grid-two-cols cardFirstContent">
+                  <p className="cardProvider">{provider}</p>
+                  <p className="cardPrice">{price}</p>
+                </div>
+                <h2>{service}</h2>
+                <p>{description}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+export default Service;

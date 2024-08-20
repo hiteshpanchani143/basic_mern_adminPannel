@@ -5,6 +5,7 @@ const app = express();
 const AuthRoute = require("./routes/authRoute");
 const contactRoute = require("./routes/contactRoute");
 const serviceRoute = require("./routes/serviceRoute");
+const adminRoute = require("./routes/adminRoute");
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middelware/error/errorMiddleware");
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/auth", AuthRoute);
 app.use("/api/v1/form", contactRoute);
 app.use("/api/v1/data", serviceRoute);
+app.use("/api/v1/admin", adminRoute);
 
 // Global error handling middleware (should be placed after all routes)
 app.use(errorMiddleware);

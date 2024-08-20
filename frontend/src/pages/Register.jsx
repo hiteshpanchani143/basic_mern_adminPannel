@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
-
+import { toast } from "react-toastify";
 const Register = () => {
   const [user, setUser] = useState({
     username: "",
@@ -30,7 +30,6 @@ const Register = () => {
         }
       );
       const data = await response.json();
-      console.log("data", data);
       if (response.ok) {
         storeTokenInLocalStorage(data?.token);
         setUser({
@@ -40,9 +39,9 @@ const Register = () => {
           phone: "",
         });
         navigate("/login");
-        alert(data.message);
+        toast.success("Registration Successfully");
       } else {
-        alert(data.extraDetailes ? data.extraDetailes : data.message);
+        toast.error(data.extraDetailes ? data.extraDetailes : data.message);
       }
     } catch (error) {
       console.log("error in catch", error);

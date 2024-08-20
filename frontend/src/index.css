@@ -17,6 +17,13 @@ html {
   font-size: 62.5%;
 }
 
+/* toastfy style */
+.toastBody {
+  /* color: #10171d; */
+  font-size: 1.5rem !important;
+  font-family: "Atlas Grotest Web", Ariel, Helvetica, sans-serif;
+}
+
 /*? base style */
 
 body {

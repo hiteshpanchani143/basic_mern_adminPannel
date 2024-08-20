@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
+
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
@@ -28,11 +30,13 @@ const Login = () => {
           email: "",
           password: "",
         });
-        // navigate("/");
-        alert(data.data.message);
+        navigate("/");
+        toast.success(data.data.message);
+      } else {
+        toast.error("Invalid Credintials");
       }
     } catch (error) {
-      alert(error.response.data.extraDetailes);
+      toast.error("Invalid Credintials");
     }
   };
   return (

@@ -365,3 +365,52 @@ a.active {
   display: flex;
   font-size: 13px;
 }
+
+/* admin users */
+
+.admin-users-section {
+  padding: 50px 0;
+  /* background-color: #f8f8f8; */
+}
+.admin-users-section h1 {
+  color: #fff;
+}
+
+.admin-users {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.admin-users table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px; /* Medium font size */
+  color: #000; /* Font color black */
+}
+
+.admin-users th,
+.admin-users td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-users th {
+  background-color: #f1f1f1;
+  font-weight: bold; /* Bold heading */
+}
+
+.admin-users td {
+  background-color: #fafafa;
+}
+
+.admin-users tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.admin-users tr:hover {
+  background-color: #f1f1f1;
+}

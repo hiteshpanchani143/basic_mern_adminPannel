@@ -9,9 +9,9 @@ const Service = () => {
       </div>
       <div className="container grid grid-three-cols">
         {services?.map((serviceData, index) => {
-          const { service, description, price, provider } = serviceData;
+          const { _key,service, description, price, provider } = serviceData;
           return (
-            <div className="card">
+            <div className="card" key={_key}>
               <div className="card-img">
                 <img src="/images/home.png" alt="designer" width="200" />
               </div>

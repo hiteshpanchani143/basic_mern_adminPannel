@@ -29,8 +29,9 @@ const Register = () => {
           body: JSON.stringify(user),
         }
       );
+      const data = await response.json();
+      console.log("data", data);
       if (response.ok) {
-        const data = await response.json();
         storeTokenInLocalStorage(data?.token);
         setUser({
           username: "",
@@ -39,9 +40,12 @@ const Register = () => {
           phone: "",
         });
         navigate("/login");
+        alert(data.message);
+      } else {
+        alert(data.extraDetailes ? data.extraDetailes : data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.log("error in catch", error);
     }
   };
   return (

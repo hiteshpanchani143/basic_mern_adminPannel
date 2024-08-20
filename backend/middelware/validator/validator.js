@@ -10,8 +10,8 @@ const validate = (schema) => async (req, res, next) => {
   } catch (err) {
     // res.status(400).json({ msg: err.errors[0].message });
     const status = 400;
-    const message = err.errors[0].message || "Validation error";
-    const extraDetailes = "Error from backend";
+    const message = "Fill the input properly";
+    const extraDetailes = err.errors[0].message;
     const error = {
       status,
       message,

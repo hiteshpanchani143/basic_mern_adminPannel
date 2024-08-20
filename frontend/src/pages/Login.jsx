@@ -22,18 +22,17 @@ const Login = () => {
         user
       );
       const data = await response;
-      console.log(data);
       if (data) {
         storeTokenInLocalStorage(data?.data.token);
         setUser({
           email: "",
           password: "",
         });
-        navigate("/");
+        // navigate("/");
+        alert(data.data.message);
       }
     } catch (error) {
-      console.log(error);
-      alert(error.response.data.message);
+      alert(error.response.data.extraDetailes);
     }
   };
   return (

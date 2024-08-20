@@ -10,6 +10,10 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PageNotFound from "./pages/PageNotFound";
 import Logout from "./pages/Logout";
+import AdminUsers from "./pages/AdminUsers";
+import AdminContacts from "./pages/AdminContacts";
+import AdminLayout from "./components/layouts/AdminLayout";
+
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +27,10 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/service" element={<Service />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="contacts" element={<AdminContacts />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

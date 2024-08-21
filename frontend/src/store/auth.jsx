@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
   const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const authorizationToken = `Bearer ${token}`;
   const storeTokenInLocalStorage = (token) => {
     setToken(token);
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
   // jwt authetication for get user data
   const userAuthentication = async () => {
     try {
+      setIsLoading(true)
       const response = await fetch("http://localhost:8080/api/v1/auth/user", {
         method: "GET",
         headers: {
@@ -29,6 +31,10 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data);
+        setIsLoading(false)
+      }else{
+        console.log("error in fetching user")
+        setIsLoading(false)
       }
     } catch (error) {
       console.log("error in auth context", error);
@@ -62,6 +68,7 @@ export const AuthProvider = ({ children }) => {
         user,
         services,
         authorizationToken,
+        isLoading
       }}
     >
       {children}

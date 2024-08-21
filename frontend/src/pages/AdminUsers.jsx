@@ -67,11 +67,11 @@ const AdminUsers = () => {
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
                   <td>
-                    <button className="btn"><NavLink to={`/admin/user/${user._id}/edit`}>Edit</NavLink></button>
+                    <button className="btn btnEdit"><NavLink to={`/admin/user/${user._id}/edit`}>Edit</NavLink></button>
                   </td>
                   <td>
                     <button
-                      className="btn"
+                      className="btn btnDelete"
                       onClick={() => deleteUser(user._id)}
                     >
                       Delete

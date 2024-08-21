@@ -16,6 +16,12 @@ router.get(
   adminMiddleware,
   adminController.getSingleUser
 );
+router.patch(
+  "/user/edit/:id",
+  authMiddleware,
+  adminMiddleware,
+  adminController.getUserAndUpdate
+);
 router.delete(
   "/user/delete/:id",
   authMiddleware,

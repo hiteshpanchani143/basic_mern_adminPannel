@@ -25,7 +25,22 @@ const getSingleUser = async (req, res) => {
     next(error);
   }
 };
-
+const getUserAndUpdate = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateData = req.body
+    console.log(id)
+    console.log(updateData)
+    const updatedData = await User.findOneAndUpdate({ _id: id }, {
+      $set: updateData
+    },{
+      new:true
+    });
+    return res.status(200).json(updatedData);
+  } catch (error) {
+    next(error);
+  }
+};
 const deleteUser = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -69,6 +84,7 @@ const getAllContact = async (req, res) => {
 module.exports = {
   getAllUser,
   getSingleUser,
+  getUserAndUpdate,
   deleteUser,
   getAllServices,
   getAllContact,

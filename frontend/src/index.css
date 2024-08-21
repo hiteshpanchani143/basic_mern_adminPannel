@@ -414,3 +414,14 @@ a.active {
 .admin-users tr:hover {
   background-color: #f1f1f1;
 }
+.btnEdit {
+  background-color: green !important;
+  opacity: .8;
+}
+.btnDelete {
+  background-color: red !important;
+  opacity: .8;
+}
+.admin-users a {
+  color: #fff;
+}

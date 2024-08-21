@@ -9,7 +9,7 @@ const Register = () => {
     password: "",
     phone: "",
   });
-  const { storeTokenInLocalStorage } = useAuth();
+  const { storeTokenInLocalStorage,API } = useAuth();
   const navigate = useNavigate();
   const handleInput = (e) => {
     const name = e.target.name;
@@ -20,7 +20,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/auth/register",
+        `${API}/api/v1/auth/register`,
         {
           method: "POST",
           headers: {

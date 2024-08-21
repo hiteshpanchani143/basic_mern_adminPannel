@@ -8,6 +8,9 @@ export const AuthProvider = ({ children }) => {
   const [services, setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const authorizationToken = `Bearer ${token}`;
+
+  const API = import.meta.env.VITE_APP_URI_API;
+
   const storeTokenInLocalStorage = (token) => {
     setToken(token);
     return localStorage.setItem("token", token);
@@ -21,8 +24,8 @@ export const AuthProvider = ({ children }) => {
   // jwt authetication for get user data
   const userAuthentication = async () => {
     try {
-      setIsLoading(true)
-      const response = await fetch("http://localhost:8080/api/v1/auth/user", {
+      setIsLoading(true);
+      const response = await fetch(`${API}/api/v1/auth/user`, {
         method: "GET",
         headers: {
           Authorization: authorizationToken,
@@ -31,10 +34,10 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data);
-        setIsLoading(false)
-      }else{
-        console.log("error in fetching user")
-        setIsLoading(false)
+        setIsLoading(false);
+      } else {
+        console.log("error in fetching user");
+        setIsLoading(false);
       }
     } catch (error) {
       console.log("error in auth context", error);
@@ -44,9 +47,7 @@ export const AuthProvider = ({ children }) => {
   // get services
   const getServices = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:8080/api/v1/data/services"
-      );
+      const response = await fetch(`${API}/api/v1/data/services`);
       if (response.ok) {
         const data = await response.json();
         setServices(data.message);
@@ -68,7 +69,8 @@ export const AuthProvider = ({ children }) => {
         user,
         services,
         authorizationToken,
-        isLoading
+        isLoading,
+        API
       }}
     >
       {children}

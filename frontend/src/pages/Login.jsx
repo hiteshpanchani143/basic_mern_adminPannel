@@ -10,7 +10,7 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const { storeTokenInLocalStorage } = useAuth();
+  const { storeTokenInLocalStorage,API } = useAuth();
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/login",
+        `${API}/api/v1/auth/login`,
         user
       );
       const data = await response;

@@ -8,7 +8,7 @@ const Contact = () => {
     message: "",
   });
   const [userData, setUserData] = useState(true);
-  const { user } = useAuth();
+  const { user,API } = useAuth();
   console.log("user", user);
   if (userData && user) {
     setContact({
@@ -34,7 +34,7 @@ const Contact = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/form/contact",
+        `${API}/api/v1/form/contact`,
         contact
       );
       if (response.statusText) {

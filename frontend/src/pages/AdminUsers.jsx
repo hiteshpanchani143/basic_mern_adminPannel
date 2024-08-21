@@ -5,10 +5,10 @@ import { NavLink } from "react-router-dom";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
-  const { authorizationToken } = useAuth();
+  const { authorizationToken, API } = useAuth();
   const getAllUsersData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/admin/user", {
+      const response = await fetch(`${API}/api/v1/admin/user`, {
         method: "GET",
         headers: {
           Authorization: authorizationToken,
@@ -23,7 +23,7 @@ const AdminUsers = () => {
   const deleteUser = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/v1/admin/user/delete/${id}`,
+        `${API}/api/v1/admin/user/delete/${id}`,
         {
           headers: {
             Authorization: authorizationToken,

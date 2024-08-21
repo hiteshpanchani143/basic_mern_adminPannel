@@ -10,20 +10,17 @@ const AdminEditContact = () => {
     message: "",
   });
   const { id } = useParams();
-  console.log(id)
-  const { authorizationToken } = useAuth();
+  console.log(id);
+  const { authorizationToken, API } = useAuth();
   const navigate = useNavigate();
   const getSingleContactData = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/admin/contact/${id}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: authorizationToken,
-          },
-        }
-      );
+      const response = await fetch(`${API}/api/v1/admin/contact/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: authorizationToken,
+        },
+      });
       const data = await response.json();
       if (response.ok) {
         setContact({
@@ -44,17 +41,14 @@ const AdminEditContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/admin/contact/edit/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authorizationToken,
-          },
-          body: JSON.stringify(contact),
-        }
-      );
+      const response = await fetch(`${API}/api/v1/admin/contact/edit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authorizationToken,
+        },
+        body: JSON.stringify(contact),
+      });
       const data = await response.json();
       if (response.ok) {
         toast.success("contact update successfully.");

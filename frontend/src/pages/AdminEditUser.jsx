@@ -10,19 +10,16 @@ const AdminEditUser = () => {
     phone: "",
   });
   const { id } = useParams();
-  const { authorizationToken } = useAuth();
+  const { authorizationToken, API } = useAuth();
   const navigate = useNavigate();
   const getSingleUserData = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/admin/user/${id}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: authorizationToken,
-          },
-        }
-      );
+      const response = await fetch(`${API}/api/v1/admin/user/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: authorizationToken,
+        },
+      });
       const data = await response.json();
       if (response.ok) {
         setUser({
@@ -43,17 +40,14 @@ const AdminEditUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/admin/user/edit/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authorizationToken,
-          },
-          body: JSON.stringify(user),
-        }
-      );
+      const response = await fetch(`${API}/api/v1/admin/user/edit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authorizationToken,
+        },
+        body: JSON.stringify(user),
+      });
       const data = await response.json();
       if (response.ok) {
         toast.success("user update successfully.");

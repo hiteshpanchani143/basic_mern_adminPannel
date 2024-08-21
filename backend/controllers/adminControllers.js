@@ -28,14 +28,16 @@ const getSingleUser = async (req, res) => {
 const getUserAndUpdate = async (req, res) => {
   try {
     const id = req.params.id;
-    const updateData = req.body
-    console.log(id)
-    console.log(updateData)
-    const updatedData = await User.findOneAndUpdate({ _id: id }, {
-      $set: updateData
-    },{
-      new:true
-    });
+    const updateData = req.body;
+    const updatedData = await User.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: updateData,
+      },
+      {
+        new: true,
+      }
+    );
     return res.status(200).json(updatedData);
   } catch (error) {
     next(error);
@@ -81,6 +83,42 @@ const getAllContact = async (req, res) => {
     next(error);
   }
 };
+const getSingleContact = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const singleContact = await Contact.findOne({ _id: id });
+    return res.status(200).json(singleContact);
+  } catch (error) {
+    next(error);
+  }
+};
+const getContactAndUpdate = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateData = req.body;
+    const updatedData = await Contact.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: updateData,
+      },
+      {
+        new: true,
+      }
+    );
+    return res.status(200).json(updatedData);
+  } catch (error) {
+    next(error);
+  }
+};
+const deleteContact = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await Contact.findOneAndDelete({ _id: id });
+    return res.status(200).json({ message: "Contact Delete Successfully." });
+  } catch (error) {
+    next(error);
+  }
+};
 module.exports = {
   getAllUser,
   getSingleUser,
@@ -88,4 +126,7 @@ module.exports = {
   deleteUser,
   getAllServices,
   getAllContact,
+  getSingleContact,
+  getContactAndUpdate,
+  deleteContact,
 };

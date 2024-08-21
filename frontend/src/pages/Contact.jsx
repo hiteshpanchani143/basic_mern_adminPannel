@@ -44,7 +44,7 @@ const Contact = () => {
         alert(data.message);
       }
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response.data.extraDetailes);
       console.log(error);
     }
   };

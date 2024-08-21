@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import axios from "axios";
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -67,7 +67,11 @@ const AdminUsers = () => {
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
                   <td>
-                    <button className="btn btnEdit"><NavLink to={`/admin/user/${user._id}/edit`}>Edit</NavLink></button>
+                    <button className="btn btnEdit">
+                      <NavLink to={`/admin/user/${user._id}/edit`}>
+                        Edit
+                      </NavLink>
+                    </button>
                   </td>
                   <td>
                     <button

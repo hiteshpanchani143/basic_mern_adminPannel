@@ -416,11 +416,11 @@ a.active {
 }
 .btnEdit {
   background-color: green !important;
-  opacity: .8;
+  opacity: 0.8;
 }
 .btnDelete {
   background-color: red !important;
-  opacity: .8;
+  opacity: 0.8;
 }
 .admin-users a {
   color: #fff;

@@ -3,19 +3,20 @@ import { useAuth } from "../store/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const AdminEditUser = () => {
-  const [user, setUser] = useState({
+const AdminEditContact = () => {
+  const [contact, setContact] = useState({
     username: "",
     email: "",
-    phone: "",
+    message: "",
   });
   const { id } = useParams();
+  console.log(id)
   const { authorizationToken } = useAuth();
   const navigate = useNavigate();
-  const getSingleUserData = async () => {
+  const getSingleContactData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/admin/user/${id}`,
+        `http://localhost:8080/api/v1/admin/contact/${id}`,
         {
           method: "GET",
           headers: {
@@ -25,10 +26,10 @@ const AdminEditUser = () => {
       );
       const data = await response.json();
       if (response.ok) {
-        setUser({
+        setContact({
           username: data.username,
           email: data.email,
-          phone: data.phone,
+          message: data.message,
         });
       }
     } catch (error) {
@@ -38,40 +39,40 @@ const AdminEditUser = () => {
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setUser((prev) => ({ ...prev, [name]: value }));
+    setContact((prev) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/admin/user/edit/${id}`,
+        `http://localhost:8080/api/v1/admin/contact/edit/${id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: authorizationToken,
           },
-          body: JSON.stringify(user),
+          body: JSON.stringify(contact),
         }
       );
       const data = await response.json();
       if (response.ok) {
-        toast.success("user update successfully.");
-        navigate("/admin/users");
+        toast.success("contact update successfully.");
+        navigate("/admin/contacts");
       } else {
-        toast("user not update");
+        toast("contact not update");
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getSingleUserData();
+    getSingleContactData();
   }, []);
   return (
     <section className="">
       <div className="container">
-        <h1>Admin Users Data</h1>
+        <h1>Admin Contact Data</h1>
       </div>
       <div className="container ">
         <section className="section-form">
@@ -85,7 +86,7 @@ const AdminEditUser = () => {
                 id="username"
                 required
                 autoComplete="off"
-                value={user.username}
+                value={contact.username}
                 onChange={handleInput}
               />
             </div>
@@ -98,20 +99,22 @@ const AdminEditUser = () => {
                 id="email"
                 required
                 autoComplete="off"
-                value={user.email}
+                value={contact.email}
                 onChange={handleInput}
               />
             </div>
             <div>
-              <label htmlFor="phone">phone</label>
-              <input
-                type="number"
-                name="phone"
-                placeholder="enter your phone"
-                id="phone"
+              <label htmlFor="message">message</label>
+              <textarea
+                type="text"
+                name="message"
+                placeholder="enter your message"
+                id="message"
                 required
+                rows={10}
+                cols={50}
                 autoComplete="off"
-                value={user.phone}
+                value={contact.message}
                 onChange={handleInput}
               />
             </div>
@@ -126,4 +129,4 @@ const AdminEditUser = () => {
   );
 };
 
-export default AdminEditUser;
+export default AdminEditContact;

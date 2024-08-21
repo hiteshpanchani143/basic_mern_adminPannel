@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import axios from "axios";
+import {NavLink} from "react-router-dom"
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -29,14 +30,12 @@ const AdminUsers = () => {
           },
         }
       );
-      console.log("response", response);
       const data = await response;
-      console.log("user after delete", data);
       if (data) {
         getAllUsersData();
       }
     } catch (error) {
-      console.log("catch block", error);
+      console.log("error in catch block", error);
     }
   };
   useEffect(() => {
@@ -68,7 +67,7 @@ const AdminUsers = () => {
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
                   <td>
-                    <button className="btn">Edit</button>
+                    <button className="btn"><NavLink to={`/admin/user/${user._id}/edit`}>Edit</NavLink></button>
                   </td>
                   <td>
                     <button
